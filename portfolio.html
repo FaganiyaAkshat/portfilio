@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshat Faganiya - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a1433, #1e3a5f);
+            color: #e6f1ff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+            /* Reduced padding for smaller screens */
+        }
+
+        /* Parallax Background */
+        #parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .parallax-layer {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            background: rgba(30, 58, 95, 0.2);
+            border-radius: 50%;
+            animation: parallaxMove 20s infinite ease-in-out;
+        }
+
+        .parallax-layer:nth-child(2) {
+            background: rgba(65, 105, 225, 0.15);
+            animation-duration: 25s;
+            top: -20%;
+            left: -20%;
+        }
+
+        /* Navigation Bar */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 20, 51, 0.9);
+            padding: 20px 0;
+            /* Adjusted padding */
+            z-index: 1000;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav.sticky {
+            padding: 10px 0;
+            /* Reduced when sticky */
+            background: rgba(10, 20, 51, 1);
+            box-shadow: 0 6px 25px rgba(65, 105, 225, 0.3);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            /* Allow wrapping on small screens */
+        }
+
+        .logo {
+            font-size: 24px;
+            /* Slightly smaller base size */
+            font-weight: 800;
+            background: linear-gradient(45deg, #4169e1, #87cefa);
+            -webkit-background-clip: text;
+            color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #e6f1ff;
+            text-decoration: none;
+            margin-left: 20px;
+            /* Reduced margin */
+            font-size: 16px;
+            /* Adjusted base size */
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #4169e1, #87cefa);
+            bottom: -8px;
+            left: 0;
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #87cefa;
+            transform: translateY(-3px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+            /* Added padding for smaller screens */
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            /* Reduced gap */
+            opacity: 0;
+            animation: scaleIn 1.5s ease-out forwards;
+            flex-wrap: wrap;
+            /* Allow wrapping */
+            justify-content: center;
+        }
+
+        .profile-photo {
+            width: 250px;
+            /* Smaller base size */
+            height: 250px;
+            border-radius: 50%;
+            background: url('https://via.placeholder.com/280') no-repeat center/cover;
+            border: 6px solid #4169e1;
+            /* Slightly thinner border */
+            box-shadow: 0 0 20px rgba(65, 105, 225, 0.7);
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-photo::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(135, 206, 250, 0.2), transparent);
+            animation: gradientSweep 3s infinite linear;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 40px rgba(65, 105, 225, 1);
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            /* Reduced base size */
+            background: linear-gradient(45deg, #87cefa, #4169e1);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 15px rgba(65, 105, 225, 0.5);
+            animation: rotateReveal 1.8s ease-out forwards;
+            text-align: center;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            /* Reduced base size */
+            color: #b0c4de;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: slideUpReveal 2s ease-out 0.5s forwards;
+            text-align: center;
+        }
+
+        .cta-btn {
+            padding: 15px 40px;
+            /* Slightly smaller */
+            background: linear-gradient(45deg, #4169e1, #87cefa);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            /* Adjusted base size */
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 25px rgba(65, 105, 225, 0.6);
+            position: relative;
+            overflow: hidden;
+            display: block;
+            margin: 0 auto;
+            /* Center on small screens */
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            top: 0;
+            left: 0;
+            transition: width 0.5s ease;
+        }
+
+        .cta-btn:hover::before {
+            width: 100%;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(65, 105, 225, 0.9);
+        }
+
+        /* General Section Styles */
+        .section {
+            padding: 100px 0;
+            /* Reduced base padding */
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            /* Reduced base size */
+            background: linear-gradient(45deg, #87cefa, #4169e1);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 50px;
+            /* Adjusted margin */
+            text-align: center;
+            text-shadow: 0 4px 15px rgba(65, 105, 225, 0.4);
+            position: relative;
+            opacity: 0;
+            animation: rotateReveal 1.5s ease-out forwards;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            /* Slightly smaller */
+            height: 4px;
+            /* Thinner */
+            background: linear-gradient(45deg, #4169e1, #87cefa);
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(65, 105, 225, 0.6);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 100%;
+            /* Full width on smaller screens */
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px;
+            /* Reduced padding */
+            background: rgba(30, 58, 95, 0.35);
+            border-radius: 20px;
+            /* Slightly smaller */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            animation: scaleIn 1.5s ease-out forwards;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            /* Reduced base size */
+            color: #b0c4de;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideUpReveal 1.8s ease-out 0.3s forwards;
+        }
+
+        /* Education Section */
+        .education-content {
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px;
+            background: rgba(30, 58, 95, 0.35);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            animation: scaleIn 1.5s ease-out forwards;
+        }
+
+        .education-content p {
+            font-size: 1.2rem;
+            color: #b0c4de;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideUpReveal 1.8s ease-out 0.3s forwards;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            /* Smaller min width */
+            gap: 30px;
+            /* Reduced gap */
+            margin-top: 40px;
+            /* Adjusted margin */
+        }
+
+        .skill-card {
+            background: rgba(30, 58, 95, 0.5);
+            padding: 25px;
+            /* Reduced padding */
+            border-radius: 15px;
+            /* Smaller radius */
+            text-align: center;
+            transition: all 0.6s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(65, 105, 225, 0.3);
+            opacity: 0;
+            animation: scaleIn 1s ease-out forwards;
+        }
+
+        .skill-card:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+
+        .skill-card:nth-child(even) {
+            animation-delay: 0.4s;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.05) rotate(2deg);
+            background: linear-gradient(45deg, #4169e1, #87cefa);
+            box-shadow: 0 15px 40px rgba(65, 105, 225, 0.7);
+            border-color: #87cefa;
+        }
+
+        .skill-card span {
+            font-size: 1.2rem;
+            /* Reduced base size */
+            font-weight: 600;
+            color: #e6f1ff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            /* Adjusted min width */
+            gap: 35px;
+            /* Reduced gap */
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: rgba(30, 58, 95, 0.5);
+            padding: 30px;
+            /* Reduced padding */
+            border-radius: 20px;
+            transition: all 0.6s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(65, 105, 225, 0.3);
+            opacity: 0;
+            animation: scaleIn 1s ease-out forwards;
+        }
+
+        .project-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .project-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0;
+            background: rgba(135, 206, 250, 0.2);
+            top: 0;
+            left: 0;
+            transition: height 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            background: linear-gradient(45deg, #4169e1, #87cefa);
+            box-shadow: 0 20px 50px rgba(65, 105, 225, 0.8);
+            border-color: #87cefa;
+        }
+
+        .project-card h3 {
+            font-size: 1.6rem;
+            /* Reduced base size */
+            margin-bottom: 15px;
+            color: #e6f1ff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card p {
+            color: #b0c4de;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            /* Adjusted */
+        }
+
+        .project-card a {
+            color: #87cefa;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            padding: 6px 12px;
+            /* Smaller padding */
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .project-card a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Interests Section */
+        .interests-content {
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px;
+            background: rgba(30, 58, 95, 0.35);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            animation: scaleIn 1.5s ease-out forwards;
+        }
+
+        .interests-content p {
+            font-size: 1.2rem;
+            color: #b0c4de;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideUpReveal 1.8s ease-out 0.3s forwards;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 40px;
+            /* Reduced padding */
+            background: rgba(30, 58, 95, 0.4);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            animation: scaleIn 1.5s ease-out forwards;
+        }
+
+        .contact-form {
+            margin-top: 30px;
+            /* Reduced margin */
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            /* Adjusted */
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            /* Smaller padding */
+            background: rgba(65, 105, 225, 0.15);
+            border: 2px solid #4169e1;
+            border-radius: 10px;
+            color: #e6f1ff;
+            font-size: 1rem;
+            /* Adjusted */
+            transition: all 0.4s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #87cefa;
+            box-shadow: 0 0 15px rgba(65, 105, 225, 0.5);
+            background: rgba(65, 105, 225, 0.25);
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            /* Slightly smaller */
+            resize: vertical;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: -12px;
+            /* Adjusted */
+            left: 20px;
+            background: #0a1433;
+            padding: 0 8px;
+            font-size: 0.9rem;
+            /* Smaller */
+            color: #87cefa;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .received-messages {
+            margin-top: 40px;
+            /* Reduced margin */
+            padding: 20px;
+            /* Smaller padding */
+            background: rgba(65, 105, 225, 0.15);
+            border-radius: 15px;
+            max-height: 300px;
+            /* Adjusted height */
+            overflow-y: auto;
+            border: 1px solid rgba(135, 206, 250, 0.3);
+        }
+
+        .message-item {
+            background: linear-gradient(45deg, #4169e1, #87cefa);
+            padding: 20px;
+            /* Reduced padding */
+            border-radius: 12px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: scaleIn 0.8s ease-out forwards;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-item h4 {
+            font-size: 1.2rem;
+            /* Reduced */
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-item p {
+            font-size: 0.9rem;
+            /* Adjusted */
+            color: #f0f8ff;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+            /* Reduced margin */
+            font-size: 1.1rem;
+            /* Smaller base size */
+            color: #b0c4de;
+        }
+
+        .contact-info a {
+            color: #87cefa;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 4px 8px;
+            /* Smaller padding */
+            border-radius: 8px;
+        }
+
+        .contact-info a:hover {
+            color: #fff;
+            background: rgba(135, 206, 250, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUpReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px) rotateX(-10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        @keyframes parallaxMove {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-50px) translateX(50px);
+            }
+
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+        }
+
+        @keyframes rotateReveal {
+            from {
+                opacity: 0;
+                transform: rotateY(90deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: rotateY(0);
+            }
+        }
+
+        @keyframes gradientSweep {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+                padding: 0 20px;
+            }
+
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+
+            .profile-photo {
+                width: 220px;
+                height: 220px;
+            }
+
+            .section-title {
+                font-size: 2.8rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            /* Hide nav links, could add a hamburger menu */
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .hero-text p {
+                font-size: 1.3rem;
+            }
+
+            .cta-btn {
+                padding: 12px 35px;
+                font-size: 15px;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 40px;
+            }
+
+            .section-title::after {
+                width: 100px;
+            }
+
+            .about-content,
+            .education-content,
+            .interests-content {
+                padding: 30px;
+            }
+
+            .skill-card {
+                padding: 20px;
+            }
+
+            .skill-card span {
+                font-size: 1.1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                padding: 25px;
+            }
+
+            .project-card h3 {
+                font-size: 1.4rem;
+            }
+
+            .contact-container {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+                padding: 15px 0;
+            }
+
+            .profile-photo {
+                width: 180px;
+                height: 180px;
+                border-width: 5px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text p {
+                font-size: 1.2rem;
+            }
+
+            .cta-btn {
+                padding: 10px 30px;
+                font-size: 14px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
+
+            .section-title::after {
+                width: 80px;
+                height: 3px;
+                bottom: -15px;
+            }
+
+            .about-content p,
+            .education-content p,
+            .interests-content p {
+                font-size: 1.1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 20px;
+            }
+
+            .skill-card {
+                padding: 15px;
+            }
+
+            .skill-card span {
+                font-size: 1rem;
+            }
+
+            .project-card {
+                padding: 20px;
+            }
+
+            .project-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .project-card p {
+                font-size: 0.9rem;
+            }
+
+            .project-card a {
+                padding: 5px 10px;
+                font-size: 0.9rem;
+            }
+
+            .contact-container {
+                padding: 25px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+
+            .form-group textarea {
+                height: 120px;
+            }
+
+            .form-group label {
+                font-size: 0.8rem;
+                top: -10px;
+                left: 15px;
+            }
+
+            .received-messages {
+                padding: 15px;
+                max-height: 250px;
+            }
+
+            .message-item {
+                padding: 15px;
+            }
+
+            .message-item h4 {
+                font-size: 1.1rem;
+            }
+
+            .message-item p {
+                font-size: 0.8rem;
+            }
+
+            .contact-info {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 20px;
+            }
+
+            .hero {
+                min-height: 70vh;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+                border-width: 4px;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .cta-btn {
+                padding: 8px 25px;
+                font-size: 13px;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 25px;
+            }
+
+            .section-title::after {
+                width: 60px;
+                height: 2px;
+                bottom: -10px;
+            }
+
+            .about-content,
+            .education-content,
+            .interests-content {
+                padding: 20px;
+            }
+
+            .about-content p,
+            .education-content p,
+            .interests-content p {
+                font-size: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .skill-card {
+                padding: 12px;
+            }
+
+            .skill-card span {
+                font-size: 0.9rem;
+            }
+
+            .project-card {
+                padding: 15px;
+            }
+
+            .project-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+
+            .project-card p {
+                font-size: 0.8rem;
+                margin-bottom: 15px;
+            }
+
+            .project-card a {
+                padding: 4px 8px;
+                font-size: 0.8rem;
+            }
+
+            .contact-container {
+                padding: 20px;
+            }
+
+            .contact-form {
+                margin-top: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+
+            .form-group textarea {
+                height: 100px;
+            }
+
+            .form-group label {
+                font-size: 0.7rem;
+                top: -8px;
+                left: 10px;
+            }
+
+            .received-messages {
+                margin-top: 30px;
+                padding: 10px;
+                max-height: 200px;
+            }
+
+            .message-item {
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+
+            .message-item h4 {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+
+            .message-item p {
+                font-size: 0.7rem;
+            }
+
+            .contact-info {
+                font-size: 0.9rem;
+                margin-top: 20px;
+            }
+
+            .contact-info a {
+                padding: 3px 6px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="parallax-bg">
+        <div class="parallax-layer" style="top: -10%; left: -10%;"></div>
+        <div class="parallax-layer" style="top: -20%; left: -20%;"></div>
+    </div>
+
+    <nav class="nav">
+        <div class="container nav-content">
+            <div class="logo">Akshat Faganiya</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#interests">Interests</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="profile-photo"></div>
+            <div class="hero-text">
+                <h1>Hey, I'm Akshat</h1>
+                <p>Passionate Developer | Problem Solver | Tech Enthusiast</p>
+                <button class="cta-btn" onclick="scrollToSection('contact')">Get in Touch</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="container about-content">
+            <p>Akshat Faganiya is a passionate and detail-oriented developer with a strong problem-solving mindset. He
+                is highly dedicated to innovation, continuously learning new technologies, and creating efficient,
+                user-friendly applications. With a focus on precision and creativity, he strives to build impactful and
+                scalable solutions.</p>
+            <p>Throughout my journey, I have developed self-discipline, a strong work ethic, teamwork, leadership
+                skills, analytical thinking, and a passion for problem-solving, alongside extensive technical expertise.
+            </p>
+        </div>
+    </section>
+
+    <section class="section" id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="container education-content">
+            <p><strong>2022-2025 | BCA Graduate</strong><br>Kamani Science and Prataprai Arts College</p>
+            <p>Gained expertise in programming languages like C, C++, Java, Python, Kotlin, and web development tools
+                including PHP, HTML, CSS, JS, ASP.NET, and database management. Developed strong problem-solving skills,
+                analytical thinking, and hands-on experience in mobile and web application development, and system
+                design.</p>
+        </div>
+    </section>
+
+    <section class="section" id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="container skills-grid">
+            <div class="skill-card"><span>C / C++</span></div>
+            <div class="skill-card"><span>Java</span></div>
+            <div class="skill-card"><span>Python</span></div>
+            <div class="skill-card"><span>Kotlin</span></div>
+            <div class="skill-card"><span>Flutter & Dart</span></div>
+            <div class="skill-card"><span>Android Development</span></div>
+            <div class="skill-card"><span>Web Development (PHP, HTML, CSS, JS)</span></div>
+            <div class="skill-card"><span>ASP.NET</span></div>
+            <div class="skill-card"><span>MySQL & SQLite</span></div>
+            <div class="skill-card"><span>Git & GitHub</span></div>
+            <div class="skill-card"><span>QT Designer</span></div>
+            <div class="skill-card"><span>Firebase</span></div>
+            <div class="skill-card"><span>VS Code</span></div>
+            <div class="skill-card"><span>IntelliJ IDEA</span></div>
+            <div class="skill-card"><span>PyCharm</span></div>
+            <div class="skill-card"><span>Android Studio</span></div>
+        </div>
+    </section>
+
+    <section class="section" id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="container projects-grid">
+            <div class="project-card">
+                <h3>Blog Management System</h3>
+                <p>A fully dynamic web-based platform built using PHP, HTML, CSS, JavaScript, and MySQL that allows
+                    users to create, share, and manage blog posts. Admins can manage the entire website for their own
+                    purposes.</p>
+                <a href="https://github.com/FaganiyaAkshat" target="_blank">View on GitHub</a>
+            </div>
+            <div class="project-card">
+                <h3>Kubera Financial Guardians</h3>
+                <p>A standalone desktop application developed using PyQt and Python, utilizing SQLite for database
+                    management to assist with financial tracking.</p>
+                <a href="https://github.com/FaganiyaAkshat" target="_blank">View on GitHub</a>
+            </div>
+            <div class="project-card">
+                <h3>My Expense Manager</h3>
+                <p>A mobile application built with Flutter and Dart, designed to store and track client expenses locally
+                    using SQLite. It tracks, manages, and predicts user expenses and activities.</p>
+                <a href="https://github.com/FaganiyaAkshat" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="interests">
+        <h2 class="section-title">Interests</h2>
+        <div class="container interests-content">
+            <p>Beyond coding, I am highly inclined toward self-improvement and mindfulness. I enjoy meditation, riding,
+                and reading books, with <em>Wings of Fire</em> being one of my most inspiring reads. These activities
+                help me stay focused, disciplined, and creative.</p>
+            <p>- Passionate about problem-solving, coding challenges, and analytical reasoning.<br>
+                - Strong interest in quantitative aptitude and mathematical problem-solving.<br>
+                - Hobbies include meditation, riding, and reading inspiring books.</p>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="container contact-container">
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="from_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="from_email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="cta-btn">Send Message</button>
+            </form>
+            <div class="received-messages" id="receivedMessages"></div>
+            <div class="contact-info">
+                <p>+91 8200641807 | akshatpatel152@gmail.com |
+                    <a href="http://www.linkedin.com/in/akshat-faganiya152" target="_blank">LinkedIn</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // EmailJS Initialization
+        (function () {
+            emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS User ID
+        })();
+
+        // Smooth Scroll Function
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Sticky Navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('sticky', window.scrollY > 50);
+        });
+
+        // Contact Form Submission with EmailJS
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (name && email && message) {
+                const templateParams = {
+                    from_name: name,
+                    from_email: email,
+                    message: message,
+                    to_email: 'akshatpatel152@gmail.com'
+                };
+
+                emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                    .then(() => {
+                        alert('Message sent successfully!');
+                        displayReceivedMessage(name, email, message);
+                        document.getElementById('contactForm').reset();
+                    }, (error) => {
+                        alert('Failed to send message. Error: ' + error.text);
+                        console.error('EmailJS Error:', error);
+                    });
+            } else {
+                alert('Please fill all fields!');
+            }
+        });
+
+        // Display Received Messages
+        function displayReceivedMessage(name, email, message) {
+            const messagesContainer = document.getElementById('receivedMessages');
+            const messageItem = document.createElement('div');
+            messageItem.className = 'message-item';
+            messageItem.innerHTML = `
+                <h4>From: ${name} (${email})</h4>
+                <p>${message}</p>
+            `;
+            messagesContainer.insertBefore(messageItem, messagesContainer.firstChild);
+        }
+
+        // Intersection Observer for Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.about-content, .education-content, .skill-card, .project-card, .interests-content, .contact-container')
+            .forEach(el => {
+                observer.observe(el);
+            });
+
+        // Hover Effects for Cards
+        const cards = document.querySelectorAll('.skill-card, .project-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = card.classList.contains('skill-card') ? 'scale(1.05) rotate(2deg)' : 'scale(1.05)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'none';
+            });
+        });
+
+        // CTA Button Animation
+        const ctaBtns = document.querySelectorAll('.cta-btn');
+        ctaBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.style.animation = 'scalePulse 0.5s ease';
+                setTimeout(() => btn.style.animation = '', 500);
+            });
+        });
+
+        // Dynamic Animation Keyframes
+        const styleSheet = document.styleSheets[0];
+        styleSheet.insertRule(`
+            @keyframes scalePulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+        `, styleSheet.cssRules.length);
+    </script>
+</body>
+
+</html>
